@@ -1,0 +1,52 @@
+.mainContainer {
+    margin: 0%;
+    padding: 20px;
+    background-color: rgb(2, 37, 64);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menuContainer ul {
+    padding-right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.logoContainer {
+    width: 100px;
+    height: 10px;
+
+}
+
+.menuContainer li {
+    color: white;
+    list-style: none;
+    padding: 4px;
+}
+
+.menuContainer li:nth-child(1) {
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.menuContainer li:nth-child(1):hover {
+    background-color: white;
+    color: black;
+}
+
+.menuContainer button {
+    outline: none;
+    border: none;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.menuContainer li:nth-child(4) {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: url('https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-28-search-blue-177462d06db81ff2a02aa022c1c0be5ba4200d7bd3f51091ed9298980e3a26a1.svg') no-repeat;
+}
