@@ -1,0 +1,10 @@
+.searchBarContainer {
+    display: flex;
+}
+
+.searchBar {
+    outline: none;
+    border-color: transparent;
+    width: 90%;
+    border-radius: 180px;
+}

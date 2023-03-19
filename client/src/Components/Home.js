@@ -1,13 +1,16 @@
 import React from 'react'
-import { useLocation } from 'react-router'
+import Header from './Header';
+// import { useLocation } from 'react-router'
 import InnerNavBar from './InnerNavBar';
+import PopularMovieDisplay from './PopularMovieDisplay';
 //{location.state.id}
 function Home() {
-    const location = useLocation();
+    // const location = useLocation();
     return (
         <div>
             <InnerNavBar />
-            <h1>Hello! Welcome to The Movie Database!</h1>
+            <Header />
+            <PopularMovieDisplay />
         </div>
     )
 }

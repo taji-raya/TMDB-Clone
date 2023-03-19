@@ -13,7 +13,6 @@ function NavBar() {
                     <li>EN</li>
                     <li><Link to='/LoginPage'><button><strong>Login </strong></button></Link></li>
                     <li><Link to='/RegisterPage'><button><strong>Join TMDB </strong></button></Link></li>
-                    <li><button></button></li>
                 </ul>
             </div>
         </div>

@@ -8,15 +8,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.get("/LoginPage", cors(), (req, res) => {
+app.get("/login", cors(), (req, res) => {
 
 })
+
 app.post("/LoginPage", async (req, res) => {
     const { username, password } = req.body
     try {
         const check = await collection.findOne({ username: username })
         if (check) {
-            res.json('exist');
+            res.json('exists');
         }
         else {
             res.json('does not exist')
@@ -29,24 +30,22 @@ app.post("/LoginPage", async (req, res) => {
 })
 
 app.post("/RegisterPage", async (req, res) => {
-    const { username, password } = req.body
     const data = {
-        username: username,
-        password: password
+        username: req.body.username,
+        password: req.body.password
     }
     try {
         const check = await collection.findOne({ username: username })
         if (check) {
-            res.json('exist');
+            res.json('exists');
         }
         else {
             res.json('does not exist')
-            await collection.insertMany([data])
+            await collection.insertMany([data]);
         }
 
     } catch (e) {
         res.json('error')
-
     }
 })
 

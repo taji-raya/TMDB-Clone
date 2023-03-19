@@ -1,0 +1,54 @@
+.divider {
+    margin-bottom: 10%;
+}
+
+.infoContainer {
+    position: relative;
+    margin: 5%;
+    padding: 10%;
+    padding-top: 20px;
+    display: flex;
+    text-align: left;
+    margin-top: 10px;
+}
+
+/* .detailsBackgroundImage {
+    border: 3px solid red;
+    position: absolute;
+}
+
+#coverImage {
+    margin-right: 10%;
+    height: 10%;
+    opacity: 0.6px;
+    background-image: linear-gradient(to right, rgba(31.5, 31.5, 10.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 31.5, 10.5, 0.84) 50%, rgba(31.5, 31.5, 10.5, 0.84) 100%);
+} */
+
+.innerContentImage {
+    width: 200px;
+    height: 300px;
+    align-items: center;
+    float: left;
+    position: relative;
+}
+
+.innerInfoContainer {
+    float: right;
+    position: relative;
+    padding-left: 20%;
+}
+
+.buttonContainer {
+    display: flex;
+}
+
+.buttonContainer button {
+    border-radius: 50px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: rgb(3, 37, 65);
+    color: #fff;
+    margin: 10px;
+    cursor: pointer;
+}

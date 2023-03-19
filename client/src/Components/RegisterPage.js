@@ -4,31 +4,29 @@ import NavBar from './NavBar'
 import axios from 'axios'
 import './RegisterStyle.css'
 
+//, { state: { id: username } }
+
 //DONT FORGET TO DO PASSWORD CONFIRMATION
 function RegisterPage() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
     async function submit(e) {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3000/RegisterPage',
-                username, password
-            )
-                .then(res => { // eslint-disable-next-line
-                    if (res.data = 'exist') {
-                        alert('Username/Email already exists. Please choose another username :)')
-
+            await axios.post('http://localhost:8000/RegisterPage', { username, password })
+                .then(res => {
+                    if (res.data === 'exists') {
+                        alert('Username already exists. Please choose another username :)');
                     }// eslint-disable-next-line
-                    else if (res.data = 'does not exist') {
-                        navigate('/Home', { state: { id: username } })
+                    else if (res.data === 'does not exist') {
+                        alert('user created')
+                        navigate('/Home')
                     }
                 })
                 .catch((e) => {
-                    alert('')
+                    alert('Error')
                     console.log(e)
-
                 })
         } catch (err) {
             console.log(err)
@@ -39,7 +37,6 @@ function RegisterPage() {
             <NavBar />
             <div className='registerFormContainer'>
                 <div className='formContainer'>
-
                     <form action='POST'>
                         <h1> Create a new account </h1>
                         <br />

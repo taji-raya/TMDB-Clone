@@ -11,21 +11,20 @@ function LoginPage() {
     async function submit(e) {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3000/LoginPage',
-                username, password
+            await axios.post('http://localhost:8000/LoginPage',
+                { username, password }
             )
                 .then(res => { // eslint-disable-next-line
-                    if (res.data === 'exist') {
+                    if (res.data === 'exists') {
                         navigate('/Home', { state: { id: username } });// eslint-disable-next-line
                     }
                     else if (res.data === 'does not exist') {
-                        alert('User does not exist. Register >:(');
+                        alert('Wrong username or password!');
                     }
                 })
                 .catch((e) => {
-                    alert('Wrong username or password!')
+                    alert('')
                     console.log(e)
-
                 })
         } catch (err) {
             console.log(err)
@@ -39,7 +38,7 @@ function LoginPage() {
                     <form action='POST'>
                         <h1>Login  </h1>
                         <br />
-                        <p>   New to TMDB? register <Link to='/RegisterPage'>here</Link></p>
+                        <p> New to TMDB? register <Link to='/RegisterPage'>here</Link></p>
                         <br />
                         <input
                             id='username'
@@ -64,6 +63,7 @@ function LoginPage() {
                             value='Login'
                             onClick={submit} />
                     </form>
+                    <Link to='/Home'> <button>HOME</button></Link>
                 </div>
 
             </div>

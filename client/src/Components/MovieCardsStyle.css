@@ -1,0 +1,11 @@
+.cardContainer {
+    position: relative;
+    padding: 10px;
+}
+
+.menuButtonContainer {
+    position: absolute;
+    bottom: 10;
+    left: 50;
+    float: right;
+}

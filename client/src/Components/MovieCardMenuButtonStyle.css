@@ -1,0 +1,44 @@
+.menuButton button {
+    background-image: url('https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-947-circle-more-white-4c440dfc1b0e626c70f4853dbbce9c4d1f2c5d8f3e05a7d3df47881cbd816adf.svg');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    height: 30px;
+    width: 30px;
+    padding: 15px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menuButton button :hover {
+    background-color: rgb(1, 180, 228);
+    color: black;
+}
+
+.dropdownMenu {
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid rgba(33, 37, 41, 0.15);
+    width: 100px;
+    height: 100px;
+}
+
+.dropdownMenu ul {
+    list-style: none;
+    padding: 4px 0;
+}
+
+.listItem li {
+    font-weight: 600;
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.6);
+    background-color: transparent;
+    cursor: pointer;
+    width: 100%;
+}
+
+.listItem:hover {
+    background-color: rgb(3, 37, 65);
+    color: white;
+}

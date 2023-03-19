@@ -5,6 +5,8 @@ import LoginPage from './Components/LoginPage';
 import RegisterPage from './Components/RegisterPage';
 import Landing from './Components/Landing';
 import Home from './Components/Home'
+import MovieDetails from './Components/MovieDetails'
+
 function App() {
   return (
     <div className="App">
@@ -14,6 +16,8 @@ function App() {
           <Route path='/LoginPage' element={<LoginPage />} />
           <Route path='/RegisterPage' element={<RegisterPage />} />
           <Route path='/Home' element={<Home />} />
+          <Route path="/MovieDetails/:movieID" element={<MovieDetails />} />
+
 
         </Route>
 
