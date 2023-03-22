@@ -14,6 +14,7 @@ function InnerNavBar() {
                         <li id='en'>EN</li>
                         <li>USER</li>
                         <Link to='/LoginPage'><li id='logout'>Logout</li></Link>
+                        <Link to='/Watchlist'><li>Watchlist</li> </Link>
                         <li id='logo'><button></button></li>
                     </ul>
                 </div>

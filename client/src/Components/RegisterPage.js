@@ -25,7 +25,7 @@ function RegisterPage() {
                     }
                 })
                 .catch((e) => {
-                    alert('Error')
+                    alert('Client error')
                     console.log(e)
                 })
         } catch (err) {
@@ -65,9 +65,7 @@ function RegisterPage() {
                         <input id='register_button' type='submit' value='Register' onClick={submit} />
                     </form>
                 </div>
-
             </div>
-
         </div>
     )
 }

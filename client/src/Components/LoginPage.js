@@ -7,7 +7,6 @@ function LoginPage() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
     async function submit(e) {
         e.preventDefault();
         try {
@@ -20,6 +19,9 @@ function LoginPage() {
                     }
                     else if (res.data === 'does not exist') {
                         alert('Wrong username or password!');
+                    }
+                    else if (!res.data) {
+                        alert('Please fill out all of the fields!')
                     }
                 })
                 .catch((e) => {

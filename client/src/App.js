@@ -6,6 +6,7 @@ import RegisterPage from './Components/RegisterPage';
 import Landing from './Components/Landing';
 import Home from './Components/Home'
 import MovieDetails from './Components/MovieDetails'
+import Watchlist from './Components/Watchlist';
 
 function App() {
   return (
@@ -16,9 +17,8 @@ function App() {
           <Route path='/LoginPage' element={<LoginPage />} />
           <Route path='/RegisterPage' element={<RegisterPage />} />
           <Route path='/Home' element={<Home />} />
+          <Route path='/Watchlist' element={<Watchlist />} />
           <Route path="/MovieDetails/:movieID" element={<MovieDetails />} />
-
-
         </Route>
 
       </Routes>
