@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import NavBar from './NavBar'
-import axios from 'axios'
 import './RegisterStyle.css'
 
 //, { state: { id: username } }
@@ -10,24 +9,30 @@ import './RegisterStyle.css'
 function RegisterPage() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
     async function submit(e) {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8000/RegisterPage', { username, password })
-                .then(res => {
-                    if (res.data === 'exists') {
-                        alert('Username already exists. Please choose another username :)');
-                    }// eslint-disable-next-line
-                    else if (res.data === 'does not exist') {
-                        alert('user created')
-                        navigate('/Home')
-                    }
-                })
-                .catch((e) => {
-                    alert('Client error')
-                    console.log(e)
-                })
+            const response = await fetch('http://localhost:8000/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    email,
+                    password
+                }),
+            })
+            const data = await response.json();
+            if (!email || !password || !username) {
+                alert('Please fill in all the fields');
+            }
+            else if (data.status === 'ok') {
+                navigate('/LoginPage')
+            }
         } catch (err) {
             console.log(err)
         }
@@ -45,12 +50,19 @@ function RegisterPage() {
                         <input id='username'
                             type='text'
                             name='username'
-                            placeholder='Username'
+                            placeholder='Name'
                             onChange={(e) => {
                                 setUsername(e.target.value)
                             }}
                         />
                         <br />
+                        <input input id='email'
+                            type='email'
+                            name='email'
+                            placeholder='Email'
+                            onChange={(e) => {
+                                setEmail(e.target.value)
+                            }} />
                         <input id='password'
                             type='password'
                             name='password'
@@ -58,15 +70,16 @@ function RegisterPage() {
                             onChange={(e) => {
                                 setPassword(e.target.value)
                             }} />
+
                         <br />
                         <input id='confirmPassword' type='password' name='confirmPassword' placeholder='STILL WORKING ON PASSWORD CONFIRMATION' />
                         <br />
-                        <input id='email' type='text' name='email' placeholder='Email'></input>
+
                         <input id='register_button' type='submit' value='Register' onClick={submit} />
                     </form>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

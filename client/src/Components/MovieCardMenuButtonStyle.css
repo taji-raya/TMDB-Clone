@@ -29,16 +29,10 @@
     padding: 4px 0;
 }
 
-.listItem li {
-    font-weight: 600;
-    font-size: 0.9em;
-    color: rgba(0, 0, 0, 0.6);
+.listItem button {
+    border: none;
+    outline: none;
     background-color: transparent;
-    cursor: pointer;
-    width: 100%;
 }
 
-.listItem:hover {
-    background-color: rgb(3, 37, 65);
-    color: white;
-}
+.listItem button:hover {}

@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router';
+import { GlobalProvider } from './Context/GlobalContext';
 import SharedLayouts from './Components/SharedLayouts';
 import LoginPage from './Components/LoginPage';
 import RegisterPage from './Components/RegisterPage';
@@ -11,17 +12,19 @@ import Watchlist from './Components/Watchlist';
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path='/' element={<SharedLayouts />}>
-          <Route index element={<Landing />} />
-          <Route path='/LoginPage' element={<LoginPage />} />
-          <Route path='/RegisterPage' element={<RegisterPage />} />
-          <Route path='/Home' element={<Home />} />
-          <Route path='/Watchlist' element={<Watchlist />} />
-          <Route path="/MovieDetails/:movieID" element={<MovieDetails />} />
-        </Route>
+      <GlobalProvider>
+        <Routes>
+          <Route path='/' element={<SharedLayouts />}>
+            <Route index element={<Landing />} />
+            <Route path='/LoginPage' exact element={<LoginPage />} />
+            <Route path='/RegisterPage' exact element={<RegisterPage />} />
+            <Route path='/Home' element={<Home />} />
+            <Route path='/Watchlist' element={<Watchlist />} />
+            <Route path="/MovieDetails/:movieID/:mediaType" element={<MovieDetails />} />
+          </Route>
+        </Routes>
+      </GlobalProvider>
 
-      </Routes>
 
     </div>
   );

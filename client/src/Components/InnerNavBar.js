@@ -12,7 +12,7 @@ function InnerNavBar() {
                 <div className='innerMenuContainer'>
                     <ul>
                         <li id='en'>EN</li>
-                        <li>USER</li>
+                        {/* <li>USER</li> */}
                         <Link to='/LoginPage'><li id='logout'>Logout</li></Link>
                         <Link to='/Watchlist'><li>Watchlist</li> </Link>
                         <li id='logo'><button></button></li>

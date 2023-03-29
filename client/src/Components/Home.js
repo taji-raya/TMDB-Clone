@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
+import jwt from 'jsonwebtoken'
 import Header from './Header';
-// import { useLocation } from 'react-router'
 import InnerNavBar from './InnerNavBar';
 import PopularMovieDisplay from './PopularMovieDisplay';
-//{location.state.id}
+
 function Home() {
-    // const location = useLocation();
+    const navigate = useNavigate()
+
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            const user = jwt.decode(token)
+            if (!user) {
+                localStorage.removeItem('token')
+                navigate('/LoginPage')
+            }
+        }
+    })
+
     return (
         <div>
             <InnerNavBar />

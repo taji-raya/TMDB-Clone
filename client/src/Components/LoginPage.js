@@ -1,36 +1,37 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import NavBar from './NavBar'
 import './LoginStyle.css'
 function LoginPage() {
     const navigate = useNavigate();
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     async function submit(e) {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8000/LoginPage',
-                { username, password }
-            )
-                .then(res => { // eslint-disable-next-line
-                    if (res.data === 'exists') {
-                        navigate('/Home', { state: { id: username } });// eslint-disable-next-line
-                    }
-                    else if (res.data === 'does not exist') {
-                        alert('Wrong username or password!');
-                    }
-                    else if (!res.data) {
-                        alert('Please fill out all of the fields!')
-                    }
-                })
-                .catch((e) => {
-                    alert('')
-                    console.log(e)
-                })
+            const response = await fetch('http://localhost:8000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                }),
+            })
+            const data = await response.json()
+            if (data.user) {
+                localStorage.setItem('token', data.user)
+                navigate('/Home')
+            }
+            else if (!data.user) {
+                alert('wrong credentials')
+            }
+
         } catch (err) {
             console.log(err)
         }
+
     }
     return (
         <div>
@@ -43,12 +44,12 @@ function LoginPage() {
                         <p> New to TMDB? register <Link to='/RegisterPage'>here</Link></p>
                         <br />
                         <input
-                            id='username'
+                            id='email'
                             type='text'
-                            name='username'
-                            placeholder='Username'
+                            name='email'
+                            placeholder='Email'
                             onChange={(e) => {
-                                setUsername(e.target.value)
+                                setEmail(e.target.value)
                             }} />
 
                         <br />
@@ -65,7 +66,7 @@ function LoginPage() {
                             value='Login'
                             onClick={submit} />
                     </form>
-                    <Link to='/Home'> <button>HOME</button></Link>
+                    {/* <Link to='/Home'> <button>HOME</button></Link> */}
                 </div>
 
             </div>

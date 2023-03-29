@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
+import { GlobalContext } from '../Context/GlobalContext'
 import './MovieCardMenuButtonStyle.css'
-const MovieCardMenuButton = () => {
-    const Menus = ['Favorite', 'Watchlist']
+const MovieCardMenuButton = ({ movie }) => {
     const [open, setOpen] = useState(false);
+    const [buttonText, setButtonText] = useState('Watchlist');
+    const { addToWatchlist, watchlist } = useContext(GlobalContext);
+    let storedMovie = watchlist.find(o => o.id === movie.id);
+    const watchlistDisabled = storedMovie ? true : false;
     return (
         <>
             <div className='menuButton'>
@@ -13,16 +17,22 @@ const MovieCardMenuButton = () => {
                 open && (
                     <div className='dropdownMenu'>
                         <ul>
-                            {Menus.map((menu) => (
-                                <div key={menu}>
-                                    <li key={menu} className='listItem'
-                                        onClick={() => setOpen(false)}> {menu} </li>
-                                    <br />
-                                </div>
-                            ))
-                            }
+                            <div className='listItem'>
+                                <li
+                                    onClick={() => setOpen(false)}>
+                                </li>
+                                <li><button>Favorite </button></li>
+                                <br />
+                                <li>
+                                    <button
+                                        onClick={() => {
+                                            addToWatchlist(movie)
+                                            setButtonText('Added')
+                                        }}
+                                        disabled={watchlistDisabled}>
+                                        {buttonText}</button></li>
+                            </div>
                         </ul>
-
                     </div>
                 )
             }

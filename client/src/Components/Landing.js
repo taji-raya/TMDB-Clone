@@ -7,6 +7,7 @@ function Landing() {
         <div>
             <NavBar />
             <h1>Welcome to The Movie Database!</h1>
+            <h3>Sign in or create an account to continue</h3>
             <Outlet />
 
         </div>

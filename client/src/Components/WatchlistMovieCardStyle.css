@@ -1,0 +1,14 @@
+.movieCard {
+    display: flex;
+    margin: 30px;
+    box-shadow: 5px 10px 18px #888888;
+    padding: 10px;
+}
+.movieCard h3 {
+    padding-left: 30px;
+}
+.movieImage {
+    width: 200px;
+    height: 300px;
+}
+

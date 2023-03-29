@@ -10,7 +10,6 @@ function NavBar() {
             </div>
             <div className='menuContainer'>
                 <ul>
-                    <li>EN</li>
                     <li><Link to='/LoginPage'><button><strong>Login </strong></button></Link></li>
                     <li><Link to='/RegisterPage'><button><strong>Join TMDB </strong></button></Link></li>
                 </ul>

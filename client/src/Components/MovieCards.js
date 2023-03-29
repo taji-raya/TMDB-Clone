@@ -7,9 +7,9 @@ function MovieCards(props) {
     return (
         <div key={props.id} className='cardContainer'>
             <div className='menuButtonContainer'>
-                <MovieCardMenuButton />
+                <MovieCardMenuButton movie={props.movie} />
             </div>
-            <Link to={`/MovieDetails/${props.id}`}>
+            <Link to={`/MovieDetails/${props.id}/${props.mediaType}`}>
                 <img
                     src={`https://image.tmdb.org/t/p/w500/${props.img}`}
                     alt=''
@@ -20,7 +20,8 @@ function MovieCards(props) {
             <div >
                 <h4>{props.vote_average}</h4>
             </div>
-            <Link to={`/MovieDetails/${props.id}`}><h6>{props.title}</h6></Link>
+            <Link to={`/MovieDetails/${props.id}/${props.mediaType}`}><h6>{props.name || props.title}</h6></Link>
+            <h5>{props.release_date || props.first_air_date}</h5>
         </div>
 
     )
