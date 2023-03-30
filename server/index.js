@@ -7,57 +7,33 @@ const app = express();
 
 app.use(cors());
 app.use(express.json())
+mongoose.connect('mongodb://localhost:27017/TMDB-users');
 
-mongoose.connect('mongodb://localhost:27017/TMDB-users')
+const createToken = (_id) => {
+    return jwt.sign({ _id }, 'secret', { expiresIn: '3d' });
+}
+
 app.post('/api/register', async (req, res) => {
-    // console.log(req.body)
+    const { username, email, password } = req.body;
     try {
-        const test = await User.create({
-            username: req.body.username,
-            email: req.body.email.toLowerCase(),
-            password: req.body.password
-        })
-        res.json({ status: "ok", result: test });
-    } catch (error) {
-        res.json({ status: 'error', error: '????' });
+        const user = await User.signup(username, email, password)
+        const token = createToken(user._id)
+        res.status(200).json({ email, token })
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message })
     }
 });
 
-// app.post('/api/register', async (req, res) => {
-//     const user = new User({
-//         username: req.body.username,
-//         email: req.body.email.toLowerCase(),
-//         password: req.body.password
-//     });
-//     user.save(function (err) {
-//         if (err) {
-//             res.json({ status: "ok", result: test });
-//         } else {
-//             res.json({ status: 'error', error: '????' });
-//         }
-//     })
-
-// });
-
 app.post('/api/login', async (req, res) => {
+    const { email, password } = req.body;
     try {
-        const user = await User.findOne({
-            email: req.body.email,
-            password: req.body.password
-        })
-        if (user) {
-            const token = jwt.sign({
-                username: req.body.username,
-                email: req.body.email,
-            },
-                'secret')
-            return res.json({ status: 'ok', user: token })
-        } else {
-            return res.json({ status: 'error', user: false })
-        }
-    } catch (error) {
-        console.log(error)
-        res.json({ status: 'error', error: 'server error idk' })
+        const user = await User.login(email, password)
+        const token = createToken(user._id)
+        res.status(200).json({ email, token })
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message })
     }
 });
 
