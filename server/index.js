@@ -12,7 +12,6 @@ mongoose.connect('mongodb://localhost:27017/TMDB-users');
 const createToken = (_id) => {
     return jwt.sign({ _id }, 'secret', { expiresIn: '3d' });
 }
-
 app.post('/api/register', async (req, res) => {
     const { username, email, password } = req.body;
     try {
@@ -33,7 +32,7 @@ app.post('/api/login', async (req, res) => {
         res.status(200).json({ email, token })
     }
     catch (error) {
-        res.status(400).json({ error: error.message })
+        res.status(400).json({ error: 'Wrong Credentials' })
     }
 });
 

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { GlobalContext } from '../Context/GlobalContext';
+import { WatchlistContext } from '../Context/WatchlistContext';
 import { Link } from 'react-router-dom';
 import './WatchlistMovieCardStyle.css'
 
 function WatchlistMovieCard({ movie, type }) {
-    const { removeFromWatchlist } = useContext(GlobalContext);
+    const { removeFromWatchlist } = useContext(WatchlistContext);
     return (
         <div className='movieContainer'>
             <div className='movieCard'>

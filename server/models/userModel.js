@@ -10,7 +10,7 @@ const User = new mongoose.Schema({
     { collection: 'TMDB-users' })
 User.statics.signup = async function (username, email, password) {
     if (!email || !password) {
-        throw Error('All fields must be filled');
+        throw Error('Please fill in all the fields');
     }
     if (!validator.isEmail(email)) {
         throw Error('Email is not valid');
@@ -27,7 +27,6 @@ User.statics.signup = async function (username, email, password) {
     catch (e) {
         console.log(e)
     }
-    
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
     const user = await this.create({ username, email, password: hash });
@@ -36,7 +35,7 @@ User.statics.signup = async function (username, email, password) {
 
 User.statics.login = async function (email, password) {
     if (!email || !password) {
-        throw Error('All fields must be filled');
+        throw Error('Please fill in all the fields');
     }
     try {
         const user = await this.findOne({ email })

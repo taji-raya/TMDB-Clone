@@ -1,7 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useLogout } from '../Context/hooks/useLogout';
+import { useAuthContext } from '../Context/hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 import './InnerNavBarStyle.css';
 function InnerNavBar() {
+    const navigate = useNavigate();
+    const { logout } = useLogout();
+    const { user } = useAuthContext();
+    const handleClick = () => {
+        logout();
+        // navigate('/');
+    }
     return (
         <>
             <div className='innerMainContainer'>
@@ -12,8 +22,8 @@ function InnerNavBar() {
                 <div className='innerMenuContainer'>
                     <ul>
                         <li id='en'>EN</li>
-                        {/* <li>USER</li> */}
-                        <Link to='/LoginPage'><li id='logout'>Logout</li></Link>
+                        <li>{user.email}</li>
+                        <li id='logout'><button onClick={handleClick}>Logout</button></li>
                         <Link to='/Watchlist'><li>Watchlist</li> </Link>
                         <li id='logo'><button></button></li>
                     </ul>

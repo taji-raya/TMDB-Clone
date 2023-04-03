@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { useState } from 'react'
-import { GlobalContext } from '../Context/GlobalContext'
+import { WatchlistContext } from '../Context/WatchlistContext'
 import './MovieCardMenuButtonStyle.css'
 const MovieCardMenuButton = ({ movie }) => {
     const [open, setOpen] = useState(false);
     const [buttonText, setButtonText] = useState('Watchlist');
-    const { addToWatchlist, watchlist } = useContext(GlobalContext);
+    const { addToWatchlist, watchlist } = useContext(WatchlistContext);
     let storedMovie = watchlist.find(o => o.id === movie.id);
     const watchlistDisabled = storedMovie ? true : false;
     return (

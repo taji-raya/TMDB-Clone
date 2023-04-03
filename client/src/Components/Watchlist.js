@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { GlobalContext } from '../Context/GlobalContext';
+import { WatchlistContext } from '../Context/WatchlistContext';
 import InnerNavBar from './InnerNavBar'
 import WatchlistMovieCard from './WatchlistMovieCard';
 import './WatchlistStyle.css';
 function Watchlist() {
-    const { watchlist } = useContext(GlobalContext);
+    const { watchlist } = useContext(WatchlistContext);
     return (
         <>
             <InnerNavBar />

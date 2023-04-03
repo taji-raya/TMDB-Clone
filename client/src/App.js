@@ -1,6 +1,5 @@
 import './App.css';
 import { Route, Routes } from 'react-router';
-import { GlobalProvider } from './Context/GlobalContext';
 import SharedLayouts from './Components/SharedLayouts';
 import LoginPage from './Components/LoginPage';
 import RegisterPage from './Components/RegisterPage';
@@ -12,7 +11,6 @@ import Watchlist from './Components/Watchlist';
 function App() {
   return (
     <div className="App">
-      <GlobalProvider>
         <Routes>
           <Route path='/' element={<SharedLayouts />}>
             <Route index element={<Landing />} />
@@ -23,9 +21,6 @@ function App() {
             <Route path="/MovieDetails/:movieID/:mediaType" element={<MovieDetails />} />
           </Route>
         </Routes>
-      </GlobalProvider>
-
-
     </div>
   );
 }
