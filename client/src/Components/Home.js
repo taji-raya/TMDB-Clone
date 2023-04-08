@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import Header from './Header';
 import InnerNavBar from './InnerNavBar';
 import PopularMovieDisplay from './PopularMovieDisplay';
+import Footer from './Footer';
 
 function Home() {
     const navigate = useNavigate()
@@ -25,6 +26,7 @@ function Home() {
             <InnerNavBar />
             <Header />
             <PopularMovieDisplay />
+            <Footer />
         </div>
     )
 }

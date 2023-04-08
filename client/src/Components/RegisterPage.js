@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../Context/hooks/useAuthContext'
 import NavBar from './NavBar'
 import './RegisterStyle.css'
 
 //DONT FORGET TO DO PASSWORD CONFIRMATION
 function RegisterPage() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -37,6 +37,7 @@ function RegisterPage() {
                 localStorage.setItem('user', JSON.stringify(json))
                 dispatch({ type: 'LOGIN', payload: json })
                 setIsLoading(false);
+                navigate('/LoginPage');
             }
 
         } catch (err) {

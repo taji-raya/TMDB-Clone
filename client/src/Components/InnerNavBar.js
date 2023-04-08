@@ -10,7 +10,8 @@ function InnerNavBar() {
     const { user } = useAuthContext();
     const handleClick = () => {
         logout();
-        // navigate('/');
+        console.log('Clicked');
+        navigate('/');
     }
     return (
         <>
@@ -21,10 +22,10 @@ function InnerNavBar() {
                 </div>
                 <div className='innerMenuContainer'>
                     <ul>
-                        <li id='en'>EN</li>
-                        <li>{user.email}</li>
+                        <li id='en'><button>EN </button></li>
+                        <li>{user?.email}</li>
                         <li id='logout'><button onClick={handleClick}>Logout</button></li>
-                        <Link to='/Watchlist'><li>Watchlist</li> </Link>
+                        <Link to='/Watchlist'><button> <li>Watchlist</li></button> </Link>
                         <li id='logo'><button></button></li>
                     </ul>
                 </div>

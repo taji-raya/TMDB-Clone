@@ -7,10 +7,12 @@ import Landing from './Components/Landing';
 import Home from './Components/Home'
 import MovieDetails from './Components/MovieDetails'
 import Watchlist from './Components/Watchlist';
+import { Authcheck } from './Context/hooks/useAuthContext';
 
 function App() {
   return (
     <div className="App">
+      <Authcheck>
         <Routes>
           <Route path='/' element={<SharedLayouts />}>
             <Route index element={<Landing />} />
@@ -21,6 +23,7 @@ function App() {
             <Route path="/MovieDetails/:movieID/:mediaType" element={<MovieDetails />} />
           </Route>
         </Routes>
+      </Authcheck>
     </div>
   );
 }
