@@ -1,9 +1,9 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './SearchBarStyle.css';
-function SearchBar(props) {
-    const { onSearch } = prpos;
+function SearchBar({ setResults }) {
+    const navigate = useNavigate();
     const [query, setQuery] = useState('');
-    const [results, setResults] = useState([]);
     const onChange = (e) => {
         const searchedQuery = e.target.value
         e.preventDefault();
@@ -30,7 +30,9 @@ function SearchBar(props) {
                         onChange={onChange}
                     />
                     <div>
-                        <input type='submit' value='Search' className='submitButton' />
+                        <input type='submit' value='Search' className='submitButton' onClick={() => {
+                            navigate('/ResultsPage');
+                        }} />
                     </div>
                 </div>
             </form >

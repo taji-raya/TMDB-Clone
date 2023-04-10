@@ -6,10 +6,8 @@ import InnerNavBar from './InnerNavBar';
 import PopularMovieDisplay from './PopularMovieDisplay';
 import Footer from './Footer';
 
-function Home() {
+function Home({ setResults }) {
     const navigate = useNavigate()
-
-
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
@@ -24,7 +22,7 @@ function Home() {
     return (
         <div>
             <InnerNavBar />
-            <Header />
+            <Header setResults={setResults} />
             <PopularMovieDisplay />
             <Footer />
         </div>

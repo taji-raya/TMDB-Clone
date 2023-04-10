@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLogout } from '../Context/hooks/useLogout';
 import { useAuthContext } from '../Context/hooks/useAuthContext';
@@ -8,10 +8,44 @@ function InnerNavBar() {
     const navigate = useNavigate();
     const { logout } = useLogout();
     const { user } = useAuthContext();
+    const [open, setOpen] = useState(false);
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([])
     const handleClick = () => {
         logout();
-        console.log('Clicked');
         navigate('/');
+    }
+    const openMenu = () => {
+        setOpen(!open)
+    }
+    const onChange = (e) => {
+        const searchedQuery = e.target.value;
+        e.preventDefault();
+        setQuery(searchedQuery);
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=8b8f208cf321ce6c5f01d462798b3b33&language=en-US&include_adult=false&query=${searchedQuery}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.errors) {
+                    setResults(data.results.map((r) => {
+                        r["mediaType"] = "movie"
+                        return r
+                    }));
+                } else {
+                    setResults([]);
+                }
+            })
+        fetch(`https://api.themoviedb.org/3/search/tv?api_key=8b8f208cf321ce6c5f01d462798b3b33&language=en-US&page=1&query=${searchedQuery}&include_adult=false`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.errors) {
+                    setResults([...results, ...data.results.map((r) => {
+                        r['mediaType'] = 'tv'
+                        return r
+                    })]);
+                } else {
+                    setResults([]);
+                }
+            })
     }
     return (
         <>
@@ -26,7 +60,32 @@ function InnerNavBar() {
                         <li>{user?.email}</li>
                         <li id='logout'><button onClick={handleClick}>Logout</button></li>
                         <Link to='/Watchlist'><button> <li>Watchlist</li></button> </Link>
-                        <li id='logo'><button></button></li>
+                        <div className='searchIcon'>
+                            <li id='logo' onClick={openMenu}><button></button></li>
+                        </div>
+                        {
+                            open && (
+                                <div className='innerSearchBarContainer'>
+                                    <div className='innerSearchBar'>
+                                        <input id='search'
+                                            type='search'
+                                            name='search'
+                                            placeholder='Search...'
+                                            value={query}
+                                            onChange={onChange} />
+                                    </div>
+                                    <div className='innerSearchBarResults'>
+                                        {
+                                            results.map((result, i) => {
+                                                return <div key={i}><Link to={`/MovieDetails/${result.id}/${result.mediaType}`}>{result.title || result.name}</Link></div>
+                                            })
+                                        }
+
+                                    </div>
+                                </div>
+                            )
+                        }
+
                     </ul>
                 </div>
             </div>

@@ -1,13 +1,31 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useState } from 'react'
-import { WatchlistContext } from '../Context/WatchlistContext'
 import './MovieCardMenuButtonStyle.css'
 const MovieCardMenuButton = ({ movie }) => {
     const [open, setOpen] = useState(false);
     const [buttonText, setButtonText] = useState('Watchlist');
-    const { addToWatchlist, watchlist } = useContext(WatchlistContext);
-    let storedMovie = watchlist.find(o => o.id === movie.id);
-    const watchlistDisabled = storedMovie ? true : false;
+    var token = localStorage.getItem("token");
+    var myHeaders = new Headers();
+    myHeaders.append("authorization", `Bearer ${token}`);
+    myHeaders.append("Content-Type", "application/json");
+    var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: JSON.stringify({ movie: movie }),
+        redirect: "follow",
+    };
+
+    const addToWatchList = () => {
+        fetch("http://localhost:8000/api/addToWatchList", requestOptions)
+            .then((response) => response.json())
+            .then((result) => console.log(result))
+            .catch((error) => console.log("error", error));
+    };
+
+    const addToWatchListFunctionality = () => {
+        addToWatchList();
+        setButtonText('Added to watchlsit');
+    }
     return (
         <>
             <div className='menuButton'>
@@ -21,23 +39,20 @@ const MovieCardMenuButton = ({ movie }) => {
                                 <li
                                     onClick={() => setOpen(false)}>
                                 </li>
-                                <li><button>Favorite </button></li>
                                 <br />
                                 <li>
                                     <button
-                                        onClick={() => {
-                                            addToWatchlist(movie)
-                                            setButtonText('Added')
-                                        }}
-                                        disabled={watchlistDisabled}>
-                                        {buttonText}</button></li>
+                                        onClick={addToWatchListFunctionality}
+                                    // disabled={addToWatchList}
+                                    >
+                                        {buttonText}
+                                    </button>
+                                </li>
                             </div>
                         </ul>
                     </div>
                 )
             }
-
-
         </>
     )
 }

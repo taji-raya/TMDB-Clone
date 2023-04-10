@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './HeaderStyle.css'
 import SearchBar from './SearchBar'
-function Header() {
+function Header({ setResults }) {
     return (
         <div>
             <div className='headerContainer'>
@@ -11,7 +11,7 @@ function Header() {
                         <p className='sentence'>Millions of movies, TV shows and people to discover. Explore now.</p>
                     </div>
                     <div>
-                        <SearchBar />
+                        <SearchBar setResults={setResults} />
                     </div>
                 </div>
             </div>

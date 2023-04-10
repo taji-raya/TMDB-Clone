@@ -45,9 +45,33 @@
     cursor: pointer;
 }
 
+.innerSearchBarContainer {
+    position: absolute;
+    display: flex;
+    flex-flow: row nowrap;
+    top: 14%;
+}
+
+.innerSearchBar input {
+    position: relative;
+    width: 1300px;
+    height: 30px;
+}
+
+.innerSearchBarResults {
+    position: relative;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
 #logo {
     width: 30px;
     height: 30px;
+    padding: 6px;
     cursor: pointer;
     background: url('https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-28-search-blue-177462d06db81ff2a02aa022c1c0be5ba4200d7bd3f51091ed9298980e3a26a1.svg') no-repeat;
 }

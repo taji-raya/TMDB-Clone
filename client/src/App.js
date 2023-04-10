@@ -8,8 +8,12 @@ import Home from './Components/Home'
 import MovieDetails from './Components/MovieDetails'
 import Watchlist from './Components/Watchlist';
 import { Authcheck } from './Context/hooks/useAuthContext';
+import { useState } from 'react';
+import ResultsPage from './Components/ResultsPage';
+import SearchBar from './Components/SearchBar';
 
 function App() {
+  const [results, setResults] = useState([]);
   return (
     <div className="App">
       <Authcheck>
@@ -20,6 +24,8 @@ function App() {
             <Route path='/RegisterPage' exact element={<RegisterPage />} />
             <Route path='/Home' element={<Home />} />
             <Route path='/Watchlist' element={<Watchlist />} />
+            <Route path='/SearchBar' element={<SearchBar setResults={setResults} />} />
+            <Route path='/ResultsPage' element={<ResultsPage results={results} />} />
             <Route path="/MovieDetails/:movieID/:mediaType" element={<MovieDetails />} />
           </Route>
         </Routes>

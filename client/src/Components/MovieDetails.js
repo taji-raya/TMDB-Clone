@@ -48,11 +48,11 @@ function MovieDetails() {
                         <button id='favorite'><FaHeart /> </button>
                         <Tooltip text={'Add to watchlist'} >
                             <button id='watchlist'
-                            // onClick={() => {
-                            //     addToWatchlist(movie)
-                            //     console.log('Added to watchlist')
-                            // }}
-                            // disabled={watchlistDisabled}
+                                // onClick={() => {
+                                //     addToWatchlist(movie)
+                                //     console.log('Added to watchlist')
+                                // }}
+                                // disabled={watchlistDisabled}
                             ><FaList /></button>
                         </Tooltip>
                     </div>
