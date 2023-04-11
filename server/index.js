@@ -11,15 +11,14 @@ app.use(express.json())
 mongoose.connect('mongodb://localhost:27017/TMDB-users');
 
 const createToken = (_id) => {
-    return jwt.sign({ _id }, 'secret');
+    return jwt.sign({ _id }, 'secret', { expiresIn: '3d' });
 }
 
 const verify = (req, res, next) => {
-    const authHeaders = req.headers.authorization; 
+    const authHeaders = req.headers.authorization; //when we send a request we must send the token in the header as (autherization)
     if (authHeaders) {
-        const token = authHeaders.split(" ")[1]; 
+        const token = authHeaders.split(" ")[1]; //atheHeaders={"Bearer",token}
         jwt.verify(token, 'secret', (err, decoded) => {
-            debugger;
             if (err) {
                 return res.status(403).json("Invalid token");
             }
