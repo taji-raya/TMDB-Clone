@@ -58,8 +58,8 @@ function InnerNavBar() {
                     <ul>
                         <li id='en'><button>EN </button></li>
                         <li>{user?.email}</li>
-                        <li id='logout'><button onClick={handleClick}>Logout</button></li>
                         <Link to='/Watchlist'><button> <li>Watchlist</li></button> </Link>
+                        <li id='logout'><button onClick={handleClick}>Logout</button></li>
                         <div className='searchIcon'>
                             <li id='logo' onClick={openMenu}><button></button></li>
                         </div>

@@ -3,7 +3,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require("./models/userModel");
 const jwt = require('jsonwebtoken');
-const { response } = require('express');
+const { default: MovieCardMenuButton } = require('../client/src/Components/MovieCardMenuButton');
+// const { response } = require('express');
 const app = express();
 
 app.use(cors());
@@ -15,7 +16,9 @@ const createToken = (_id) => {
 }
 
 const verify = (req, res, next) => {
-    const authHeaders = req.headers.authorization; //when we send a request we must send the token in the header as (autherization)
+    const authHeaders = req.headers.authorization;
+    //when we send a request we must send the token in the header as (autherization)
+    console.log(authHeaders)
     if (authHeaders) {
         const token = authHeaders.split(" ")[1]; //atheHeaders={"Bearer",token}
         jwt.verify(token, 'secret', (err, decoded) => {
@@ -55,20 +58,31 @@ app.post('/api/login', async (req, res) => {
 });
 
 app.post("/api/addToWatchList", verify, async (req, res) => {
+    const id = req.user._id;
     const user = await User.findOne({
-        email: req.user.email,
+        _id: id,
     });
     const movie = req.body.movie;
     if (!movie) res.status(403).json("Missing body");
-    const id = user._id;
     await User.updateOne({ _id: id }, { $push: { watchlist: movie } });
     if (!user) res.status(401).json("Not autherized");
     else res.status(200).json(await User.findById(user.id));
 });
 
-app.get("/api/watchlist", verify, async (req, res) => {
+app.delete('/api/Movie/:id', verify, async (req, res) => {
+    const id = req.user._id;
+    try {
+        const { id } = req.params
+        const movie = await MovieCardMenuButton.findOneAndD
+    } catch (error) {
+
+    }
+})
+
+app.get("/api/Watchlist", verify, async (req, res) => {
+    const id = req.user._id;
     const user = await User.findOne({
-        email: req.user.email,
+        _id: id,
     });
     res.status(200).json(user.watchlist);
 });

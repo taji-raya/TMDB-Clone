@@ -6,7 +6,7 @@ const User = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    watchlist: { type: Array }
+    watchlist: { type: Array, unique: true }
 },
     { collection: 'TMDB-users' })
 User.statics.signup = async function (username, email, password) {

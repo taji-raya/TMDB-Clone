@@ -4,17 +4,17 @@ import './MovieCardMenuButtonStyle.css'
 const MovieCardMenuButton = ({ movie }) => {
     const [open, setOpen] = useState(false);
     const [buttonText, setButtonText] = useState('Watchlist');
-    var token = localStorage.getItem("token");
-    var myHeaders = new Headers();
-    myHeaders.append("authorization", `Bearer ${token}`);
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user)
+    const myHeaders = new Headers();
+    myHeaders.append("authorization", `Bearer ${user.token}`);
     myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
+    const requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify({ movie: movie }),
         redirect: "follow",
     };
-
     const addToWatchList = () => {
         fetch("http://localhost:8000/api/addToWatchList", requestOptions)
             .then((response) => response.json())
