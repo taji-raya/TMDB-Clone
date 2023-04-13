@@ -2,9 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require("./models/userModel");
+const Movie = require('./models/MovieData')
 const jwt = require('jsonwebtoken');
-const { default: MovieCardMenuButton } = require('../client/src/Components/MovieCardMenuButton');
-// const { response } = require('express');
 const app = express();
 
 app.use(cors());
@@ -18,7 +17,6 @@ const createToken = (_id) => {
 const verify = (req, res, next) => {
     const authHeaders = req.headers.authorization;
     //when we send a request we must send the token in the header as (autherization)
-    console.log(authHeaders)
     if (authHeaders) {
         const token = authHeaders.split(" ")[1]; //atheHeaders={"Bearer",token}
         jwt.verify(token, 'secret', (err, decoded) => {
@@ -57,34 +55,55 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+//Add to watchlist 
+
 app.post("/api/addToWatchList", verify, async (req, res) => {
-    const id = req.user._id;
-    const user = await User.findOne({
-        _id: id,
+    const { poster_path, title, release_date, movieId, media_type } = req.body;
+    const userId = req.user._id;
+    const checkMovie = await Movie.findOne({
+        movieId: movieId,
+        userId: userId,
     });
-    const movie = req.body.movie;
-    if (!movie) res.status(403).json("Missing body");
-    await User.updateOne({ _id: id }, { $push: { watchlist: movie } });
-    if (!user) res.status(401).json("Not autherized");
-    else res.status(200).json(await User.findById(user.id));
+    if (checkMovie) {
+        res.status(200).json({ msg: 'Already Exists' });
+    }
+    else {
+        const addedToWatchlist = await Movie.create({
+            movieId,
+            userId,
+            poster_path,
+            title,
+            release_date,
+            media_type
+        })
+        res.status(200).json({ msg: 'Added succesfully' })
+    }
 });
+//DELETE
 
 app.delete('/api/Movie/:id', verify, async (req, res) => {
-    const id = req.user._id;
     try {
         const { id } = req.params
-        const movie = await MovieCardMenuButton.findOneAndD
+        const movie = await Movie.findOneAndDelete({ movieId: id, userId: req.user._id });
+        if (movie) {
+            res.status(200).json({ msg: "deleted successfully" });
+        } else {
+            res.status(404).json({ msg: "not found!!!!!!" });
+        }
     } catch (error) {
-
+        console.log(error);
+        res.status(500).json({ msg: "internal server error" });
     }
 })
 
 app.get("/api/Watchlist", verify, async (req, res) => {
-    const id = req.user._id;
-    const user = await User.findOne({
-        _id: id,
-    });
-    res.status(200).json(user.watchlist);
+    try {
+        const movies = await Movie.find({ userId: req.user._id })
+        res.send({ status: "ok", data: movies });
+    } catch (error) {
+        console.log(error)
+    }
+
 });
 
 app.listen(8000, () => {

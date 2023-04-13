@@ -30,9 +30,15 @@
 }
 
 .listItem button {
+    margin: 0px;
     border: none;
     outline: none;
     background-color: transparent;
+    cursor: pointer;
 }
 
-.listItem button:hover {}
+.listItem button:hover {
+    width: 100%;
+    background-color: rgb(2, 37, 64);
+    color: white;
+}

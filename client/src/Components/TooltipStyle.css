@@ -4,6 +4,7 @@
 }
 
 .tooltip {
+    
     padding: 3px;
     top: calc(-100% - 50px);
     border: 1px solid;

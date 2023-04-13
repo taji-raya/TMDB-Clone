@@ -17,7 +17,7 @@ function Home({ setResults }) {
                 navigate('/LoginPage')
             }
         }
-    }, [])
+    }, [navigate])
 
     return (
         <div>

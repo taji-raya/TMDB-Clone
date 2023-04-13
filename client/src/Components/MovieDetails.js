@@ -8,9 +8,6 @@ import { FaHeart, FaList } from 'react-icons/fa';
 function MovieDetails() {
     const [selectedMovie, setSelectedMovie] = useState('');
     const { movieID, mediaType } = useParams();
-    // const { addToWatchlist, watchlist } = useContext(GlobalContext);
-    // let storedMovie = watchlist.find(o => o.id === movie.id);
-    // const watchlistDisabled = storedMovie ? true : false;
     useEffect(() => {
         const getMovie = () => {
             fetch(
@@ -24,6 +21,34 @@ function MovieDetails() {
         getMovie();
     },
         [mediaType, movieID])
+
+    // const addToWatchList = async () => {
+    //     const user = JSON.parse(localStorage.getItem("user"));
+    //     const myHeaders = new Headers();
+    //     myHeaders.append("Authorization", `Bearer ${user.token}`);
+    //     myHeaders.append("Content-Type", "application/json");
+    //     const raw = JSON.stringify({
+    //         "poster_path": selectedMovie.poster_path,
+    //         "title": selectedMovie.title || selectedMovie.name,
+    //         "release_date": selectedMovie.release_date || selectedMovie.first_air_date,
+    //         "movieId": selectedMovie.id,
+    //         "media_type": selectedMovie.media_type
+    //     });
+    //     const requestOptions = {
+    //         method: "POST",
+    //         headers: myHeaders,
+    //         body: raw,
+    //         redirect: "follow",
+    //     };
+
+    //     fetch("http://localhost:8000/api/addToWatchList", requestOptions)
+    //         .then((response) => response.text())
+    //         .then((result) => console.log(result))
+    //         .catch((error) => console.log("error", error));
+    // };
+    // const addToWatchListFunctionality = () => {
+    //     addToWatchList();
+    // }
     return (
         <>
             <InnerNavBar />
@@ -34,7 +59,6 @@ function MovieDetails() {
                     />
                 </div> */}
                 <div>
-
                     <img
                         className='innerContentImage'
                         src={`https://image.tmdb.org/t/p/w500/${selectedMovie.poster_path}`}
@@ -48,12 +72,9 @@ function MovieDetails() {
                         <button id='favorite'><FaHeart /> </button>
                         <Tooltip text={'Add to watchlist'} >
                             <button id='watchlist'
-                                // onClick={() => {
-                                //     addToWatchlist(movie)
-                                //     console.log('Added to watchlist')
-                                // }}
-                                // disabled={watchlistDisabled}
-                            ><FaList /></button>
+                                // onClick={addToWatchListFunctionality}
+                            > <FaList />
+                            </button>
                         </Tooltip>
                     </div>
                     <h4>Overview</h4>
