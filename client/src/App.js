@@ -13,7 +13,6 @@ import ResultsPage from './Components/ResultsPage';
 import SearchBar from './Components/SearchBar';
 
 function App() {
-  const [results, setResults] = useState([]);
   return (
     <div className="App">
       <Authcheck>
@@ -24,8 +23,8 @@ function App() {
             <Route path='/RegisterPage' exact element={<RegisterPage />} />
             <Route path='/Home' element={<Home />} />
             <Route path='/Watchlist' element={<Watchlist />} />
-            <Route path='/SearchBar' element={<SearchBar setResults={setResults} />} />
-            <Route path='/ResultsPage' element={<ResultsPage results={results} />} />
+            <Route path='/SearchBar' element={<SearchBar />} />
+            <Route path='/ResultsPage/:searchQuery' element={<ResultsPage />} />
             <Route path="/MovieDetails/:movieID/:mediaType" element={<MovieDetails />} />
           </Route>
         </Routes>

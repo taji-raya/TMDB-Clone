@@ -18,7 +18,6 @@ function MovieCards(props) {
             <div>
                 <Link to={`/MovieDetails/${props.id}/${props.mediaType}`}><h6>{props.name || props.title}</h6></Link>
                 <h5>{props.release_date.substring(0, 4)}</h5>
-
             </div>
         </div>
 

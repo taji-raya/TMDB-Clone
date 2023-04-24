@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import InnerNavBar from './InnerNavBar';
-// import { GlobalContext } from '../Context/GlobalContext'
 import Tooltip from './Tooltip';
-import './MovieDetailsStyle.css'
+import './MovieDetailsStyle.css';
 import { FaHeart, FaList } from 'react-icons/fa';
 function MovieDetails() {
     const [selectedMovie, setSelectedMovie] = useState('');
@@ -15,8 +14,7 @@ function MovieDetails() {
                 .then((res) => res.json())
                 .then((data) => {
                     setSelectedMovie(data);
-                }
-                );
+                });
         }
         getMovie();
     },
