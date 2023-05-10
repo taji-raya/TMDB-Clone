@@ -20,33 +20,7 @@ function MovieDetails() {
     },
         [mediaType, movieID])
 
-    // const addToWatchList = async () => {
-    //     const user = JSON.parse(localStorage.getItem("user"));
-    //     const myHeaders = new Headers();
-    //     myHeaders.append("Authorization", `Bearer ${user.token}`);
-    //     myHeaders.append("Content-Type", "application/json");
-    //     const raw = JSON.stringify({
-    //         "poster_path": selectedMovie.poster_path,
-    //         "title": selectedMovie.title || selectedMovie.name,
-    //         "release_date": selectedMovie.release_date || selectedMovie.first_air_date,
-    //         "movieId": selectedMovie.id,
-    //         "media_type": selectedMovie.media_type
-    //     });
-    //     const requestOptions = {
-    //         method: "POST",
-    //         headers: myHeaders,
-    //         body: raw,
-    //         redirect: "follow",
-    //     };
 
-    //     fetch("http://localhost:8000/api/addToWatchList", requestOptions)
-    //         .then((response) => response.text())
-    //         .then((result) => console.log(result))
-    //         .catch((error) => console.log("error", error));
-    // };
-    // const addToWatchListFunctionality = () => {
-    //     addToWatchList();
-    // }
     return (
         <>
             <InnerNavBar />
@@ -69,9 +43,7 @@ function MovieDetails() {
                         <button id='vote'>{selectedMovie.vote_average}</button>
                         <button id='favorite'><FaHeart /> </button>
                         <Tooltip text={'Add to watchlist'} >
-                            <button id='watchlist'
-                                // onClick={addToWatchListFunctionality}
-                            > <FaList />
+                            <button id='watchlist'> <FaList />
                             </button>
                         </Tooltip>
                     </div>

@@ -8,7 +8,6 @@ import Home from './Components/Home'
 import MovieDetails from './Components/MovieDetails'
 import Watchlist from './Components/Watchlist';
 import { Authcheck } from './Context/hooks/useAuthContext';
-import { useState } from 'react';
 import ResultsPage from './Components/ResultsPage';
 import SearchBar from './Components/SearchBar';
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import InnerNavBar from './InnerNavBar';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import './ResultsPageStyle.css';
 function ResultsPage() {
     const { searchQuery } = useParams();
@@ -12,6 +13,7 @@ function ResultsPage() {
                 .then(data => {
                     if (!data.errors) {
                         setResults(data.results);
+                        console.log(setResults(data.results))
                     } else {
                         setResults([]);
                     }
@@ -19,7 +21,6 @@ function ResultsPage() {
         }
         search()
     }, [searchQuery])
-    console.log(results)
     return (
         <div>
             <InnerNavBar />
@@ -30,16 +31,20 @@ function ResultsPage() {
                             <div className='resultContainer'>
                                 <div className='resultCardContainer'>
                                     <div className='resultCardContent'>
-                                        <button>Add to watchlist</button>
-                                        <h4> {movie.title} </h4>
-                                        <div>
-                                            <img
-                                                className='innerContentImage'
-                                                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                                                alt=''
-                                            />
+                                        <div className='imageContainer'>
+                                            <Link>
+                                                <img
+                                                    className='innerContentImage'
+                                                    src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
+                                                    alt='' />
+                                            </Link>
                                         </div>
-
+                                        <div className='paragraphContainer'>
+                                            <Link to={`/MovieDetails/${movie.id}/movie`}><h4> {movie.title} </h4></Link>
+                                            <h6>{movie.release_date}</h6>
+                                            <p>{movie.overview}</p>
+                                            <br />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

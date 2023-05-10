@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './WatchlistMovieCardStyle.css'
 
 function WatchlistMovieCard({ movie, getNewWatchList }) {
-    console.log(movie)
     const handleDelete = async () => {
         const user = JSON.parse(localStorage.getItem("user"));
         const myHeaders = new Headers();

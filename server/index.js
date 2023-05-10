@@ -5,10 +5,13 @@ const User = require("./models/userModel");
 const Movie = require('./models/MovieData')
 const jwt = require('jsonwebtoken');
 const app = express();
+const path = require("path")
 
 app.use(cors());
 app.use(express.json())
 mongoose.connect('mongodb://localhost:27017/TMDB-users');
+
+app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 const createToken = (_id) => {
     return jwt.sign({ _id }, 'secret', { expiresIn: '3d' });
@@ -105,6 +108,10 @@ app.get("/api/Watchlist", verify, async (req, res) => {
     }
 
 });
+
+app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"))
+})
 
 app.listen(8000, () => {
     console.log('Server Connected');

@@ -9,7 +9,9 @@ body {
   margin: 0px;
 }
 
-.App h1 {
+.App h1,
+h4,
+h6 {
   font-family: 'Raleway', sans-serif;
 }
 
